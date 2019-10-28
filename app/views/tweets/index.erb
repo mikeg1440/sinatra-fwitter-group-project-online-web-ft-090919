@@ -1,0 +1,35 @@
+<%# binding.pry tweets index %>
+
+<% if @user %>
+
+  <h1>Welcome, <%= @user.username %></h1>
+  tweeting!
+
+  <br><br>
+
+  <a href="/tweets/new">New Tweet</a>
+
+  <br><br>
+
+  <% @tweets.each do |tweet| %>
+
+    <b><%= tweet.user.username %></b> - <%= tweet.content %>
+
+    <br><br>
+
+  <% end %>
+
+  <a href="/logout">Logout</a>
+
+<% else %>
+
+  <h2>You must login first to post or view Tweets!</h2>
+
+  <br><br>
+
+  <a href="/login">Login</a>
+
+  <br><br>
+
+  <a href="/signup">Sign Up</a>
+<% end %>
