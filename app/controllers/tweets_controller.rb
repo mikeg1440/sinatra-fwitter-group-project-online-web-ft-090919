@@ -23,10 +23,7 @@ class TweetsController < ApplicationController
     params.delete("submit")
     user = current_user
     tweet = Tweet.create(params)
-    binding.pry
     if tweet.errors.any?
-      binding.pry
-
       redirect '/tweets/new'
     else
       user.tweets << tweet
@@ -45,13 +42,16 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/edit'
+    if is_logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/edit'
+    else
+      redirect '/login'
+    end
   end
 
   patch '/tweets/:id' do
     # update the tweet
-    binding.pry
     if params[:content].empty?
       redirect "/tweets/#{params[:id]}/edit"
     else
@@ -62,8 +62,13 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    Tweet.find_by_id(params[:id]).delete
-    redirect '/tweets'
+    tweet = Tweet.find_by_id(params[:id])
+    if tweet.user == current_user
+      tweet.delete
+      redirect '/tweets'
+    else
+      redirect '/login'
+    end
   end
 
 end

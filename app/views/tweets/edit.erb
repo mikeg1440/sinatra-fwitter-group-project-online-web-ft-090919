@@ -1,16 +1,12 @@
-<% if is_logged_in? %>
-  <form action='/tweets/<%= @tweet.id %>' method="post" >
-    <input type="hidden" name="_method" value="PATCH">
-    Content:
-    <input type="text" name="content" value="<%= @tweet.content %>"><br>
-    Edit Your Tweet:
 
-    <input type="submit" name="edit_tweet" id="edit_tweet" value="Edit Tweet">
+<form action='/tweets/<%= @tweet.id %>' method="post" >
+  <input type="hidden" name="_method" value="PATCH">
+  Content:
+  <input type="text" name="content" value="<%= @tweet.content %>"><br>
+  Edit Your Tweet:
 
-    <!-- <input type="submit" name="submit"> -->
+  <input type="submit" name="edit_tweet" id="edit_tweet" value="submit">
 
-  </form>
+  <!-- <input type="submit" name="submit"> -->
 
-  <% else %>
-      <h1> You Must Be Logged in to Make Tweets </h1>
-  <% end %>
+</form>

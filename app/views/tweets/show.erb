@@ -8,13 +8,12 @@
 
   <br><br>
 
-  <% if @user && @user.tweets.include?(@tweet) %>
-    <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a><br>
-    <form action="/tweets/<%= @tweet.id %>/delete" method="post">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" name="delete" value="Delete Tweet">
-    </form>
-  <% end %>
+
+  <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a><br>
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" name="delete" value="Delete Tweet">
+  </form>
 
 <% else %>
   <h1>Tweet does not exist!</h1>
